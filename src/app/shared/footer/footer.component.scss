@@ -1,0 +1,21 @@
+html, body {
+    height: 100%;
+    margin: 0;
+  }
+  
+  body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; // Ensure the body takes the full viewport height
+  }
+  
+  .main-content {
+    flex: 1; // Ensures the main content takes up available space
+  }
+  
+  .footer {
+    background-color: #f8f9fa; // Light background
+    padding: 1rem 0;
+    text-align: center;
+    width: 100%;
+  }

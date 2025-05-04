@@ -1,0 +1,21 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  overflow: auto;
+}
+
+app-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%; /* Ensure the root container covers the full height */
+}
+
+.main-content {
+  flex: 1; /* Allow the main content to expand and push the footer down */
+}
+
+app-footer {
+  background-color: lightgray; /* Optional: add styling */
+  padding: 10px;
+  text-align: center;
+}

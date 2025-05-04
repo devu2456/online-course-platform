@@ -1,0 +1,83 @@
+<div class="container mt-5">
+  <h2 class="mb-4">Student Dashboard</h2>
+
+  <!-- Available Courses -->
+  <h3>Available Courses</h3>
+  <div *ngIf="availableCourses.length > 0; else noAvailableCourses">
+    <div *ngFor="let course of availableCourses" class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">{{ course.title }}</h5>
+        <p class="card-text">{{ course.description }}</p>
+        <button
+          class="btn btn-primary"
+          (click)="enrollInCourse(course.id)"
+        >
+          Enroll
+        </button>
+      </div>
+    </div>
+  </div>
+  <ng-template #noAvailableCourses>
+    <p>No courses available at the moment.</p>
+  </ng-template>
+
+  <!-- Enrolled Courses -->
+  <div class="container mt-5">
+    <h2 class="mb-4">My Enrolled Courses</h2>
+  
+    <div *ngIf="enrolledCourses.length > 0; else noEnrolledCourses">
+      <div *ngFor="let course of enrolledCourses" class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title">{{ course.title }}</h5>
+          <p class="card-text">{{ course.description }}</p>
+          <p><strong>Category:</strong> {{ course.category || 'N/A' }}</p>
+          <p><strong>Created At:</strong> {{ course.createdAt | date }}</p>
+          <p><strong>Modules:</strong></p>
+          <ul>
+            <li *ngFor="let module of course.modules">
+              {{ module.moduleName }}
+            </li>
+          </ul>
+  
+          <!-- Feedback Form -->
+          <div class="mt-3">
+            <h6>Submit Feedback</h6>
+            <form (ngSubmit)="submitFeedback(course.id)">
+              <div class="mb-2">
+                <label for="rating-{{ course.id }}">Rating:</label>
+                <select
+                  id="rating-{{ course.id }}"
+                  class="form-select"
+                  [(ngModel)]="feedback.rating"
+                  name="rating"
+                  required
+                >
+                  <option [value]="0" disabled>Select Rating</option>
+                  <option *ngFor="let r of [1, 2, 3, 4, 5]" [value]="r">
+                    {{ r }}
+                  </option>
+                </select>
+              </div>
+              <div class="mb-2">
+                <label for="comment-{{ course.id }}">Comment:</label>
+                <textarea
+                  id="comment-{{ course.id }}"
+                  class="form-control"
+                  [(ngModel)]="feedback.comment"
+                  name="comment"
+                  rows="2"
+                  required
+                ></textarea>
+              </div>
+              <button type="submit" class="btn btn-success">Submit Feedback</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <ng-template #noEnrolledCourses>
+      <p>You are not enrolled in any courses yet.</p>
+    </ng-template>
+  </div>
+</div>

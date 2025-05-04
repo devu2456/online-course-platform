@@ -1,0 +1,91 @@
+<div class="container mt-5" style="max-width: 400px;">
+    <h3 class="mb-4">Register</h3>
+  
+    <form (ngSubmit)="onRegister(registerForm)" #registerForm="ngForm" novalidate>
+      
+      <!-- Name -->
+      <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          name="name"
+          [(ngModel)]="registerData.name"
+          required
+          #name="ngModel"
+        />
+        <div *ngIf="name.invalid && name.touched" class="text-danger">
+          Name is required.
+        </div>
+      </div>
+  
+      <!-- Email -->
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          name="email"
+          [(ngModel)]="registerData.email"
+          required
+          email
+          #email="ngModel"
+        />
+        <div *ngIf="email.invalid && email.touched" class="text-danger">
+          <div *ngIf="email.errors?.['required']">Email is required.</div>
+          <div *ngIf="email.errors?.['email']">Please enter a valid email address.</div>
+        </div>
+      </div>
+  
+      <!-- Password -->
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          name="password"
+          [(ngModel)]="registerData.password"
+          required
+          minlength="6"
+          #password="ngModel"
+        />
+        <div *ngIf="password.invalid && password.touched" class="text-danger">
+          <div *ngIf="password.errors?.['required']">Password is required.</div>
+          <div *ngIf="password.errors?.['minlength']">Password must be at least 6 characters.</div>
+        </div>
+      </div>
+  
+      <!-- Role -->
+      <div class="mb-3">
+        <label for="role" class="form-label">Role</label>
+        <select
+          id="role"
+          name="role"
+          class="form-control"
+          [(ngModel)]="registerData.role"
+          required
+          #role="ngModel"
+        >
+          <option value="student">Student</option>
+          <option value="instructor">Instructor</option>
+        </select>
+        <div *ngIf="role.invalid && role.touched" class="text-danger">
+          Role is required.
+        </div>
+      </div>
+  
+      <!-- Submit -->
+      <button type="submit" class="btn btn-primary" [disabled]="registerForm.invalid">
+        Register
+      </button>
+  
+      <!-- Link to Login -->
+      <p class="mt-3">
+        Already have an account?
+        <a routerLink="/login">Login here</a>
+      </p>
+    </form>
+  </div>

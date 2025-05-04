@@ -1,0 +1,61 @@
+<div class="container mt-5">
+    <h2 class="mb-4">Profile</h2>
+    <form (ngSubmit)="onUpdateProfile()">
+      <div class="mb-3">
+        <label for="userId" class="form-label">User ID</label>
+        <input
+          type="text"
+          id="userId"
+          class="form-control"
+          [value]="user.id"
+          disabled
+        />
+      </div>
+      <div class="mb-3">
+        <label for="name" class="form-label">name</label>
+        <input
+          type="text"
+          id="name"
+          class="form-control"
+          [(ngModel)]="user.name"
+          name="name"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input
+          type="email"
+          id="email"
+          class="form-control"
+          [(ngModel)]="user.email"
+          name="email"
+          required
+        />
+      </div>
+      <div class="form-check mb-3">
+        <input
+          type="checkbox"
+          id="changePasswordToggle"
+          class="form-check-input"
+          [(ngModel)]="changePassword"
+          name="changePasswordToggle"
+        />
+        <label for="changePasswordToggle" class="form-check-label">
+          Change Password
+        </label>
+      </div>
+      <div *ngIf="changePassword" class="mb-3">
+        <label for="password" class="form-label">Enter New Password:</label>
+        <input
+          type="password"
+          id="password"
+          class="form-control"
+          [(ngModel)]="user.password"
+          name="password"
+          required
+        />
+      </div>
+      <button type="submit" class="btn btn-primary">Update Profile</button>
+    </form>
+  </div>
