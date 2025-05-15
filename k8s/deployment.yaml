@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: online-course-platform
+  labels:
+    app: online-course-platform
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: online-course-platform
+  template:
+    metadata:
+      labels:
+        app: online-course-platform
+    spec:
+      containers:
+      - name: online-course-platform
+        image: online-course-platform:latest
+        imagePullPolicy: Never # Ensures Kubernetes uses the local image
+        ports:
+        - containerPort: 4200
